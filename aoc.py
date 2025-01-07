@@ -19,12 +19,12 @@ def puzzle(input: str) -> Any: ...
 
 def init_puzzle(year: int, day: int, part: int, force: bool) -> None:
     folder_path = os.path.join(PUZZLE_LOCATION, f"Y{year}", f"D{day}")
-    # each year is a separate module
-    with suppress(FileExistsError):
-        with open(os.path.join(PUZZLE_LOCATION, f"Y{year}", "__init__.py"), "w"):
-            pass
     puzzle_name = os.path.join(folder_path, f"p{part}.py")
     os.makedirs(folder_path, exist_ok=True)
+    # each year is a separate module
+    with suppress(FileExistsError):
+        with open(os.path.join(PUZZLE_LOCATION, f"Y{year}", "__init__.py"), "w+"):
+            pass
 
     # Create or overwrite the puzzle file
     try:
