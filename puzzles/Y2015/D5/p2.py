@@ -7,8 +7,8 @@ def puzzle(input: str) -> Any:
     for line in lines:
         first = False
         for i in range(len(line) - 3):
-            sub = line[i:i + 2]
-            if sub in line[i + 2:]:
+            sub = line[i : i + 2]
+            if sub in line[i + 2 :]:
                 first = True
                 break
         if not first:
