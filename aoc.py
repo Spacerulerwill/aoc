@@ -51,7 +51,9 @@ def run_puzzle(year: int, day: int, part: int, aoc_session_cookie: str) -> None:
     if not os.path.isfile(input_path):
         cookies = {"session": aoc_session_cookie}
         r = requests.get(
-            f"https://adventofcode.com/{year}/day/{day}/input", cookies=cookies, headers=HEADERS
+            f"https://adventofcode.com/{year}/day/{day}/input",
+            cookies=cookies,
+            headers=HEADERS,
         )
         r.raise_for_status()
         input = r.text
