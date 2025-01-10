@@ -16,6 +16,10 @@ PUZZLE_STUB = """from typing import Any
 def puzzle(input: str) -> Any: ...
 """
 
+HEADERS = {
+    "User-Agent": "https://github.com/Spacerulerwill/aoc by williamdredding@proton.me"
+}
+
 
 def init_puzzle(year: int, day: int, part: int, force: bool) -> None:
     folder_path = os.path.join(PUZZLE_LOCATION, f"Y{year}", f"D{day}")
@@ -47,7 +51,7 @@ def run_puzzle(year: int, day: int, part: int, aoc_session_cookie: str) -> None:
     if not os.path.isfile(input_path):
         cookies = {"session": aoc_session_cookie}
         r = requests.get(
-            f"https://adventofcode.com/{year}/day/{day}/input", cookies=cookies
+            f"https://adventofcode.com/{year}/day/{day}/input", cookies=cookies, headers=HEADERS
         )
         r.raise_for_status()
         input = r.text
