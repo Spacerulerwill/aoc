@@ -55,6 +55,9 @@ def run_puzzle(year: int, day: int, part: int, aoc_session_cookie: str) -> None:
             cookies=cookies,
             headers=HEADERS,
         )
+        if not r.ok:
+            print(f"Cannot fetch puzzle input for {year} day {day}.")
+            return
         r.raise_for_status()
         input = r.text
         with open(input_path, "w+") as f:
@@ -125,9 +128,16 @@ def run_driver() -> None:
 
     # Validate day range
     day: int = args.day
-    if day < 1 or day > 25:
-        print("Day must be in range 1-25 inclusive.")
-        return
+    # Years before 2025 had 25 days
+    if year < 2025:
+        if day < 1 or day > 25:
+            print("Day must be in range 1-25 inclusive.")
+            return
+    # Years after 2025 only have 12
+    else:
+        if day < 1 or day > 12:
+            print("Day must be in range 1-12 inclusive")
+            return
 
     # Get parts
     selected_part: Literal["1", "2", "both"] = args.part
